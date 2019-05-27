@@ -181,7 +181,7 @@ gem_install_force()
   else install_params+=( --no-ri --no-rdoc )
   fi
 
-  install_params+=( $rvm_gem_options )
+  install_params+=( $(echo "$rvm_gem_options" | __rvm_sed -E 's/--no-(document|ri|rdoc)([[:space:]]+|$)//g') )
 
   __rvm_log_command \
     "gem.install.${gem_name}${gem_version:+-}${gem_version:-}" \
